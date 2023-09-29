@@ -23,3 +23,20 @@ jobs:
 
       - name: Run unit tests
         run: vendor/bin/phpunit tests
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+
+      - name: FTP deploy
+        run: |
+          chmod +x scripts/deploy.sh  # Make the script executable
+          scripts/deploy.sh
