@@ -24,6 +24,16 @@ jobs:
       - name: Run unit tests
         run: vendor/bin/phpunit tests
 
+      - name: Notify Developer on Success
+        if: ${{ success() }}
+        run: |
+          echo "Tests successful" | mail -s "Job build test was Successfull" ntuijunior1@gmail.com
+
+      - name: Notify Developer on Failure
+        if: ${{ failure() }}
+        run: |
+          echo "Tests failed" | mail -s "Job build test failed" ntuijunior1@gmail.com  
+
   deploy:
     runs-on: ubuntu-latest
 
