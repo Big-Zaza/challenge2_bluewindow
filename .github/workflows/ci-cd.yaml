@@ -30,12 +30,12 @@ jobs:
       - name: Notify Developer on Success
         if: ${{ success() }}
         run: |
-          echo "Tests successful" | sendmail -s "Job build-test success" ntuijunior1@gmail.com
+          echo "Tests successful" | mail -s "Job build-test success" ntuijunior1@gmail.com
 
       - name: Notify Developer on Failure
         if: ${{ failure() }}
         run: |
-          echo "Tests failed" | sendmail -s "Job build-test failed" ntuijunior1@gmail.com  
+          echo "Tests failed" | mail -s "Job build-test failed" ntuijunior1@gmail.com  
 
   deploy:
     runs-on: ubuntu-latest
