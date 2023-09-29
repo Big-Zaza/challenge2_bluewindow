@@ -9,6 +9,8 @@ FTP_PASSWORD="$FTP_PASSWORD"  # Use the FTP password stored in GitHub Secrets
 LOCAL_FILE="$LOCAL_FILE" # Path to the PHP file to be deployed
 REMOTE_PATH="$REMOTE_PATH"  # Remote path on the FTP server
 
+#Install the lftp command
+sudo apt-get install lftp
 # Connect to FTP server and transfer the file
 lftp -c "
 open $FTP_HOST  # Open connection to the FTP server
