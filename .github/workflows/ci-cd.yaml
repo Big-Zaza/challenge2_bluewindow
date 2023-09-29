@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-test-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,7 +17,11 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
+          
+  test:
+    runs-on: ubuntu-latest
 
+    steps:      
       - name: Install PHPUnit
         run: composer install --no-interaction --no-ansi --no-progress --no-scripts
 
