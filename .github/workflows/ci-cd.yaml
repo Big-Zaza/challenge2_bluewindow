@@ -53,3 +53,13 @@ jobs:
         run: |
           chmod +x scripts/deploy.sh  # Make the script executable
           scripts/deploy.sh
+
+      - name: Notify Developer on Success
+        if: ${{ success() }}
+        run: |
+          echo "Tests successful" | mail -s "Job deploy success" ntuijunior1@gmail.com
+
+      - name: Notify Developer on Failure
+        if: ${{ failure() }}
+        run: |
+          echo "Tests failed" | mail -s "Job deploy failed" ntuijunior1@gmail.com      
