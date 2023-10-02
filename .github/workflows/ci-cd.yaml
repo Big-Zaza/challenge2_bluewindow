@@ -51,7 +51,7 @@ jobs:
  #         php-version: '7.4'
 
       - name: Install mailutils
-        run: brew update && brew install -y mailutils      
+        run: brew install mailutils      
 
       - name: Install sshpass
         run: brew install hudochenkov/sshpass/sshpass 
