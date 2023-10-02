@@ -38,6 +38,7 @@ jobs:
           echo "Tests failed" | mail -s "Job build-test failed" ntuijunior1@gmail.com  
 
   deploy:
+    needs: build-test
     runs-on: ubuntu-latest
 
     steps:
