@@ -39,7 +39,7 @@ jobs:
 
   deploy:
     needs: build-test
-    runs-on: ubuntu-latest
+    runs-on: macos-12
 
     steps:
  #     - name: Checkout code
@@ -51,10 +51,10 @@ jobs:
  #         php-version: '7.4'
 
       - name: Install mailutils
-        run: sudo apt-get update && sudo apt-get install -y mailutils      
+        run: sudo brew update && sudo brew install -y mailutils      
 
       - name: Install sshpass
-        run: sudo apt-get update && sudo apt-get install -y sshpass  
+        run: sudo brew install hudochenkov/sshpass/sshpass 
 
       - name: FTP deploy
         run: sshpass -p "team4" scp -r /src/Average.php ubuntu@52.87.204.29:/home/ubuntu 
