@@ -57,7 +57,7 @@ jobs:
         run: brew install hudochenkov/sshpass/sshpass 
 
       - name: FTP deploy
-        run: sshpass -p "team4" scp -r /src/Average.php ubuntu@52.87.204.29:/home/ubuntu 
+        run: sshpass -p "team4" scp -r ${{ github.workspace }}/src/Average.php ubuntu@52.87.204.29:/home/ubuntu 
      #   run: |
      #     chmod +x scripts/deploy.sh  # Make the script executable
      #     scripts/deploy.sh
