@@ -3,6 +3,6 @@
 sudo apt update
 sudo apt install sshpass openssh-client
 
-sshpass -p "team4" scp -r  ./src/Average.php ubuntu@172.31.93.225:/home/ubuntu
+sshpass -p "team4" scp -r  ./src/Average.php ubuntu@52.87.204.29:/home/ubuntu
 
 
