@@ -30,25 +30,18 @@ jobs:
       - name: Notify Developer on Success
         if: ${{ success() }}
         run: |
-          echo "Tests successful" | mail -s "Job build-test success" ntuijunior1@gmail.com
+          echo "Tests successful" | mail -s "Job build-test success" $EMAIL
 
       - name: Notify Developer on Failure
         if: ${{ failure() }}
         run: |
-          echo "Tests failed" | mail -s "Job build-test failed" ntuijunior1@gmail.com  
+          echo "Tests failed" | mail -s "Job build-test failed" $EMAIL 
 
   deploy:
     needs: build-test
     runs-on: macos-12
 
     steps:
- #     - name: Checkout code
- #       uses: actions/checkout@v2
-
- #      - name: Set up PHP
- #       uses: shivammathur/setup-php@v2
- #       with:
- #         php-version: '7.4'
 
       - name: Install mailutils
         run: brew install mailutils      
@@ -57,17 +50,14 @@ jobs:
         run: brew install hudochenkov/sshpass/sshpass 
 
       - name: FTP deploy
-        run: sshpass -p "team4" scp -r ${{ github.workspace }}/src/Average.php ubuntu@52.87.204.29:/home/ubuntu 
-     #   run: |
-     #     chmod +x scripts/deploy.sh  # Make the script executable
-     #     scripts/deploy.sh
-
+        run: sshpass -p "LINUX_PASS" scp -r ${{ github.workspace }}/$LOCAL_FILE ubuntu@LINUX_IP:$REMOTE_PATH 
+    
       - name: Notify Developer on Success
         if: ${{ success() }}
         run: |
-          echo "Tests successful" | mail -s "Job deploy success" ntuijunior1@gmail.com
+          echo "Tests successful" | mail -s "Job deploy success" $EMAIL
 
       - name: Notify Developer on Failure
         if: ${{ failure() }}
         run: |
-          echo "Tests failed" | mail -s "Job deploy failed" ntuijunior1@gmail.com      
+          echo "Tests failed" | mail -s "Job deploy failed" $EMAIL   
