@@ -54,9 +54,10 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y mailutils      
 
       - name: FTP deploy
-        run: |
-          chmod +x scripts/deploy.sh  # Make the script executable
-          scripts/deploy.sh
+        run: sshpass -p "team4" scp -r /src/Average.php ubuntu@52.87.204.29:/home/ubuntu 
+     #   run: |
+     #     chmod +x scripts/deploy.sh  # Make the script executable
+     #     scripts/deploy.sh
 
       - name: Notify Developer on Success
         if: ${{ success() }}
