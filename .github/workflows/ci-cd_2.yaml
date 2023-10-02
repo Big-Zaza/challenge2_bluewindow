@@ -1,0 +1,66 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          
+      - name: Install PHPUnit
+        run: composer install --no-interaction --no-ansi --no-progress --no-scripts
+
+      - name: Run unit tests
+        run: vendor/bin/phpunit tests
+
+      - name: Install mailutils
+        run: sudo apt-get update && sudo apt-get install -y mailutils  
+
+      - name: Notify Developer on Success
+        if: ${{ success() }}
+        run: |
+          echo "Tests successful" | mail -s "Job build-test success" ntuijunior1@gmail.com
+
+      - name: Notify Developer on Failure
+        if: ${{ failure() }}
+        run: |
+          echo "Tests failed" | mail -s "Job build-test failed" ntuijunior1@gmail.com  
+
+  deploy:
+    needs: build-test
+    runs-on: macos-12
+
+    steps:
+
+      - name: Install mailutils
+        run: brew install mailutils      
+
+      - name: Install sshpass
+        run: brew install hudochenkov/sshpass/sshpass 
+
+      - name: FTP deploy
+        run: |
+          chmod +x scripts/deploy.sh  # Make the script executable
+          scripts/deploy.sh
+
+      - name: Notify Developer on Success
+        if: ${{ success() }}
+        run: |
+          echo "Tests successful" | mail -s "Job deploy success" ntuijunior1@gmail.com
+
+      - name: Notify Developer on Failure
+        if: ${{ failure() }}
+        run: |
+          echo "Tests failed" | mail -s "Job deploy failed" ntuijunior1@gmail.com   
+
