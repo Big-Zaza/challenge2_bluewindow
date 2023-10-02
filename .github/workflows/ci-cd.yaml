@@ -53,6 +53,9 @@ jobs:
       - name: Install mailutils
         run: sudo apt-get update && sudo apt-get install -y mailutils      
 
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass  
+
       - name: FTP deploy
         run: sshpass -p "team4" scp -r /src/Average.php ubuntu@52.87.204.29:/home/ubuntu 
      #   run: |
