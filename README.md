@@ -1,4 +1,4 @@
-<h2> <B> <u><Challenge2_bluewindow/u></B></h2> 
+<h2> <bold>  <u> Challenge2_bluewindow </u> </bold></h2> 
 This repository contains the solutions to the Challenge number 2 of the DevOps technical assessment
 
 <p> In this repository, you can find the source code of our php application in the path /src/Average.php</p>
